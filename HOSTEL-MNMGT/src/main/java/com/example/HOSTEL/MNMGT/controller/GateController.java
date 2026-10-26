@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+
 @RestController
 @RequestMapping("/api/gates")
 public class GateController {
@@ -63,4 +64,10 @@ public class GateController {
 
         return ResponseEntity.ok(message);
     }
+    
+@GetMapping("/free")
+public ResponseEntity<List<Gate>> getFreeGates() {
+    return ResponseEntity.ok(gateService.findFreeGates());
+}
+
 }

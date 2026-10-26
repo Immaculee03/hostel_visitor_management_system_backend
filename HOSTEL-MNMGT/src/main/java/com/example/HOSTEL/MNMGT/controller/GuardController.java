@@ -6,6 +6,7 @@ import com.example.HOSTEL.MNMGT.service.GuardService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.UUID;
@@ -63,4 +64,11 @@ public class GuardController {
 
         return ResponseEntity.ok(message);
     }
+    
+@GetMapping("/by-shift")
+public ResponseEntity<List<Guard>> getGuardsByShift(
+        @RequestParam String name) {
+    return ResponseEntity.ok(guardService.findByShiftName(name));
+}
+
 }

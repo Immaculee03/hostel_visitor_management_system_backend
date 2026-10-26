@@ -64,4 +64,8 @@ public List<Resident> findByLastName(String lastName) {
             .findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
 }
 
+public List<Resident> findResidentsVisitedByGuard(UUID guardId) {
+    return residentRepository.findResidentsVisitedByGuard(guardId);
+}
+
 }

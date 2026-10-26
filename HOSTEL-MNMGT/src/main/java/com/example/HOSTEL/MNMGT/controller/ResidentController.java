@@ -2,6 +2,7 @@
 package com.example.HOSTEL.MNMGT.controller;
 
 import com.example.HOSTEL.MNMGT.domain.Resident;
+import com.example.HOSTEL.MNMGT.repository.GuardRepository;
 import com.example.HOSTEL.MNMGT.service.ResidentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,18 @@ import java.util.UUID;
 public class ResidentController {
 
     private final ResidentService residentService;
+    private final GuardRepository guardRepository;
 
-    public ResidentController(ResidentService residentService) {
+    public ResidentController(
+            ResidentService residentService,
+            GuardRepository guardRepository) {
         this.residentService = residentService;
+        this.guardRepository = guardRepository;
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveResident(@RequestBody Resident resident) {
+    public ResponseEntity<String> saveResident(
+            @RequestBody Resident resident) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(residentService.save(resident));
     }
@@ -29,6 +35,19 @@ public class ResidentController {
     @GetMapping("/all")
     public ResponseEntity<List<Resident>> getAllResidents() {
         return ResponseEntity.ok(residentService.findAll());
+    }
+
+    @GetMapping("/of-guard/{guardId}")
+    public ResponseEntity<?> getResidentsOfGuard(
+            @PathVariable UUID guardId) {
+
+        if (!guardRepository.existsById(guardId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("The guard with that id does not exist");
+        }
+
+        return ResponseEntity.ok(
+                residentService.findResidentsVisitedByGuard(guardId));
     }
 
     @GetMapping("/{id}")
@@ -63,13 +82,11 @@ public class ResidentController {
 
         return ResponseEntity.ok(message);
     }
-    
-@GetMapping("/by-last-name")
-public ResponseEntity<List<Resident>> getResidentsByLastName(
-        @RequestParam String lastName) {
-    return ResponseEntity.ok(
-            residentService.findByLastName(lastName)
-    );
-}
 
+    @GetMapping("/by-last-name")
+    public ResponseEntity<List<Resident>> getResidentsByLastName(
+            @RequestParam String lastName) {
+        return ResponseEntity.ok(
+                residentService.findByLastName(lastName));
+    }
 }

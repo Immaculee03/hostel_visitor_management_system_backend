@@ -63,4 +63,10 @@ public class ShiftController {
 
         return ResponseEntity.ok(message);
     }
+    
+@GetMapping("/unused")
+public ResponseEntity<List<Shift>> getUnusedShifts() {
+    return ResponseEntity.ok(shiftService.findUnusedShifts());
+}
+
 }

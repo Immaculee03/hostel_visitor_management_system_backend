@@ -53,4 +53,9 @@ public class ShiftService {
         shiftRepository.deleteById(id);
         return "Shift deleted successfully";
     }
+    
+public List<Shift> findUnusedShifts() {
+    return shiftRepository.findUnusedShifts();
+}
+
 }

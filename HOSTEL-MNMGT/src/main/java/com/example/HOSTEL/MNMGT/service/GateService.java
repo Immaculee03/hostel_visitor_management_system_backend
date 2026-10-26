@@ -54,4 +54,9 @@ public class GateService {
         gateRepository.deleteById(id);
         return "Gate deleted successfully";
     }
+    
+public List<Gate> findFreeGates() {
+    return gateRepository.findFreeGates();
+}
+
 }

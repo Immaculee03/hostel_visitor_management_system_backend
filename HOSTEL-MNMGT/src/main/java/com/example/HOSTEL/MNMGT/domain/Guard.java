@@ -30,7 +30,7 @@ public class Guard {
         joinColumns = @JoinColumn(name = "guard_id"),
         inverseJoinColumns = @JoinColumn(name = "shift_id")
     )
-    @JsonIgnore
+  
     private List<Shift> shifts = new ArrayList<>();
 
     public Guard() {

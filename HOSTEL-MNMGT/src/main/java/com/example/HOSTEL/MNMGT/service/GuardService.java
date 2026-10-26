@@ -57,4 +57,9 @@ public class GuardService {
         guardRepository.deleteById(id);
         return "Guard deleted successfully";
     }
+    
+public List<Guard> findByShiftName(String name) {
+    return guardRepository.findByShiftNameContainingIgnoreCase(name);
+}
+
 }
