@@ -21,7 +21,21 @@ public class VisitService {
     }
 
     public String save(Visit visit) {
+
+        if (visit.getVisitDate().isBefore(LocalDate.now())) {
+            return "Visit date cannot be in the past";
+        }
+
+        if (visitRepository.existsByGuardAndVisitDateAndStatusNot(
+                visit.getGuard(),
+                visit.getVisitDate(),
+                VisitStatus.DENIED)) {
+            return "Guard is already supervising a visit on that date";
+        }
+
+        visit.setStatus(VisitStatus.REQUESTED);
         visitRepository.save(visit);
+
         return "Visit saved successfully";
     }
 
@@ -47,8 +61,9 @@ public class VisitService {
         visit.setResident(newVisit.getResident());
         visit.setGuard(newVisit.getGuard());
 
-        // Status is intentionally not changed by a general update.
+        // A general update must not change the visit status.
         visitRepository.save(visit);
+
         return "Visit updated successfully";
     }
 
@@ -60,14 +75,44 @@ public class VisitService {
         visitRepository.deleteById(id);
         return "Visit deleted successfully";
     }
-    
-public List<Visit> findByStatus(VisitStatus status) {
-    return visitRepository.findByStatusOrderByVisitDateAsc(status);
-}
 
-public List<Visit> findVisitsBetween(LocalDate start, LocalDate end) {
-    return visitRepository
-            .findByVisitDateBetweenOrderByVisitDateAsc(start, end);
-}
+    public List<Visit> findByStatus(VisitStatus status) {
+        return visitRepository.findByStatusOrderByVisitDateAsc(status);
+    }
 
+    public List<Visit> findVisitsBetween(
+            LocalDate start, LocalDate end) {
+        return visitRepository
+                .findByVisitDateBetweenOrderByVisitDateAsc(start, end);
+    }
+    public String updateStatus(UUID id, VisitStatus newStatus) {
+    Optional<Visit> optionalVisit = visitRepository.findById(id);
+
+    if (optionalVisit.isEmpty()) {
+        return "The visit with that id does not exist";
+    }
+
+    Visit visit = optionalVisit.get();
+    VisitStatus currentStatus = visit.getStatus();
+
+    boolean validTransition = false;
+
+    if (currentStatus == VisitStatus.REQUESTED) {
+        validTransition = newStatus == VisitStatus.CHECKED_IN
+                || newStatus == VisitStatus.DENIED;
+    } else if (currentStatus == VisitStatus.CHECKED_IN) {
+        validTransition = newStatus == VisitStatus.CHECKED_OUT
+                || newStatus == VisitStatus.DENIED;
+    }
+
+    if (!validTransition) {
+        return "Cannot change status from " + currentStatus
+                + " to " + newStatus;
+    }
+
+    visit.setStatus(newStatus);
+    visitRepository.save(visit);
+
+    return "Visit status updated successfully";
+}
 }

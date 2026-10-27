@@ -1,6 +1,7 @@
 
 package com.example.HOSTEL.MNMGT.repository;
 
+import com.example.HOSTEL.MNMGT.domain.Gate;
 import com.example.HOSTEL.MNMGT.domain.Guard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
@@ -10,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface GuardRepository
         extends JpaRepository<Guard, UUID> {
-            
+          boolean existsByGate(Gate gate);  
 @Query("SELECT DISTINCT g FROM Guard g JOIN g.shifts s " +
        "WHERE LOWER(s.name) LIKE LOWER(CONCAT('%', :name, '%'))")
 List<Guard> findByShiftNameContainingIgnoreCase(@Param("name") String name);

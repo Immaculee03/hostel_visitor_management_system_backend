@@ -22,11 +22,27 @@ public class VisitController {
         this.visitService = visitService;
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<String> saveVisit(@RequestBody Visit visit) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(visitService.save(visit));
+    
+@PostMapping("/save")
+public ResponseEntity<String> saveVisit(@RequestBody Visit visit) {
+
+    String message = visitService.save(visit);
+
+    if (message.equals("Visit date cannot be in the past")) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(message);
     }
+
+    if (message.equals(
+            "Guard is already supervising a visit on that date")) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(message);
+    }
+
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(message);
+}
+
 
     @GetMapping("/all")
     public ResponseEntity<List<Visit>> getAllVisits() {
@@ -80,6 +96,25 @@ public ResponseEntity<List<Visit>> getVisitsBetween(
     return ResponseEntity.ok(
             visitService.findVisitsBetween(start, end)
     );
+}
+@PatchMapping("/{id}/status")
+public ResponseEntity<String> updateVisitStatus(
+        @PathVariable UUID id,
+        @RequestParam VisitStatus status) {
+
+    String message = visitService.updateStatus(id, status);
+
+    if (message.equals("The visit with that id does not exist")) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(message);
+    }
+
+    if (message.startsWith("Cannot change status")) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(message);
+    }
+
+    return ResponseEntity.ok(message);
 }
 
 }

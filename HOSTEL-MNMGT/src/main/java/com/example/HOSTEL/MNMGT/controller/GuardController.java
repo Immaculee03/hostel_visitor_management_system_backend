@@ -6,10 +6,11 @@ import com.example.HOSTEL.MNMGT.service.GuardService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/guards")
@@ -69,6 +70,44 @@ public class GuardController {
 public ResponseEntity<List<Guard>> getGuardsByShift(
         @RequestParam String name) {
     return ResponseEntity.ok(guardService.findByShiftName(name));
+}
+@PutMapping("/{guardId}/shifts/{shiftId}")
+public ResponseEntity<String> addShift(
+        @PathVariable UUID guardId,
+        @PathVariable UUID shiftId) {
+
+    String message = guardService.addShift(guardId, shiftId);
+
+    if (message.equals("The guard with that id does not exist")
+            || message.equals("That shift does not exist")) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(message);
+    }
+
+    if (message.equals("The guard already has that shift")) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(message);
+    }
+
+    return ResponseEntity.ok(message);
+}
+@PatchMapping("/{guardId}/gate")
+public ResponseEntity<String> changeGate(
+        @PathVariable UUID guardId,
+        @RequestParam int gateNumber) {
+
+    String message = guardService.changeGate(guardId, gateNumber);
+
+    if (message.equals("The guard with that id does not exist")
+            || message.equals("The gate with that gateNumber does not exist")) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    }
+
+    if (message.equals("That gate is taken by another guard")) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+    }
+
+    return ResponseEntity.ok(message);
 }
 
 }
