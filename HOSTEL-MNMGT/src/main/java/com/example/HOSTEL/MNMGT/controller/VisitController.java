@@ -117,4 +117,17 @@ public ResponseEntity<String> updateVisitStatus(
     return ResponseEntity.ok(message);
 }
 
+@GetMapping("/stats/by-status")
+public ResponseEntity<List<Object[]>> countVisitsByStatus() {
+    return ResponseEntity.ok(visitService.countVisitsByStatus());
+}
+@PatchMapping("/cancel-day")
+public ResponseEntity<String> cancelVisitsForGuardOnDate(
+        @RequestParam UUID guardId,
+        @RequestParam LocalDate date) {
+
+    String message = visitService.cancelVisitsForGuardOnDate(guardId, date);
+    return ResponseEntity.ok(message);
+}
+
 }

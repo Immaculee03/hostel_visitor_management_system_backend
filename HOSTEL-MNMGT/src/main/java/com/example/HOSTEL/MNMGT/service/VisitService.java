@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @Service
 public class VisitService {
 
@@ -126,4 +127,13 @@ public class VisitService {
 
         return "Visit status updated successfully";
     }
+    
+public List<Object[]> countVisitsByStatus() {
+    return visitRepository.countVisitsByStatus();
+}
+  public String cancelVisitsForGuardOnDate(UUID guardId, LocalDate date) {
+    int count = visitRepository.cancelVisitsForGuardOnDate(guardId, date);
+    return count + " visits cancelled";
+}
+
 }
