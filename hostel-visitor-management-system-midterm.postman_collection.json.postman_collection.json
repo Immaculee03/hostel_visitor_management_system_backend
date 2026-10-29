@@ -1,0 +1,554 @@
+{
+  "info": {
+    "_postman_id": "c7688953-a083-4541-a36b-1b39c35b6627",
+    "name": "hostel-visitor-management-system-midterm.postman_collection.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58413395",
+    "_collection_link": "https://go.postman.co/collection/58413395-c7688953-a083-4541-a36b-1b39c35b6627?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "A2 shifts save",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "\r\n{\r\n  \"name\": \"Weekend\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/shifts/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "shifts",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A2 Get all gates",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/gates/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "gates",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A2 get guard by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/guards/985a4c59-e5ee-43cd-a616-609d78305108",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "guards",
+            "985a4c59-e5ee-43cd-a616-609d78305108"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A2 Update resident",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"firstName\": \"Esther\",\r\n  \"lastName\": \"Uwase\",\r\n  \"phone\": \"0798000099\",\r\n  \"regNumber\": \"25-0456\",\r\n  \"roomNumber\": \"A103\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/residents/update/ec087692-5838-4088-9197-64088e4e0ea2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "residents",
+            "update",
+            "ec087692-5838-4088-9197-64088e4e0ea2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A2 deleting visit",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/visits/delete/eda63446-97e8-48de-b12e-7aa2312cbe22",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visits",
+            "delete",
+            "eda63446-97e8-48de-b12e-7aa2312cbe22"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/residents/by-last-name?lastName=uwase",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "residents",
+            "by-last-name"
+          ],
+          "query": [
+            {
+              "key": "lastName",
+              "value": "uwase"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/visits/by-status?status=REQUESTED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visits",
+            "by-status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "REQUESTED"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/visits/between?start=2026-10-01&end=2026-10-31",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visits",
+            "between"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "2026-10-01"
+            },
+            {
+              "key": "end",
+              "value": "2026-10-31"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/guards/by-shift?name=morn",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "guards",
+            "by-shift"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "morn"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/gates/free",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "gates",
+            "free"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/shifts/unused",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "shifts",
+            "unused"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/residents/of-guard/70b19b96-7049-4891-b1d4-82f86fcc0022",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "residents",
+            "of-guard",
+            "70b19b96-7049-4891-b1d4-82f86fcc0022"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"visitDate\": \"2026-10-20\",\r\n  \"status\": \"REQUESTED\",\r\n  \"visitorName\": \"Kayitesi\",\r\n  \"purpose\": \"family\",\r\n  \"resident\": {\r\n    \"id\": \"ec087692-5838-4088-9197-64088e4e0ea2\"\r\n  },\r\n  \"guard\": {\r\n    \"id\": \"70b19b96-7049-4891-b1d4-82f86fcc0022\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/visits/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visits",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/visits/ed8daab7-ca48-4dac-b7fa-5494e070c022/status?status=CHECKED_IN",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visits",
+            "ed8daab7-ca48-4dac-b7fa-5494e070c022",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CHECKED_IN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D3",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/guards/985a4c59-e5ee-43cd-a616-609d78305108/shifts/c4f2d701-086d-485e-8e3c-0e8ae848d32e",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "guards",
+            "985a4c59-e5ee-43cd-a616-609d78305108",
+            "shifts",
+            "c4f2d701-086d-485e-8e3c-0e8ae848d32e"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/guards/70b19b96-7049-4891-b1d4-82f86fcc0022/gate?gateNumber=4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "guards",
+            "70b19b96-7049-4891-b1d4-82f86fcc0022",
+            "gate"
+          ],
+          "query": [
+            {
+              "key": "gateNumber",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"logType\": \"Normal exit\",\r\n  \"remarks\": \"Visitor left before 8 pm\",\r\n  \"durationMinutes\": 90\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/visit-logs/save?visitId=fc2dae90-f397-40d5-bb59-3c66022f41a9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visit-logs",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "visitId",
+              "value": "fc2dae90-f397-40d5-bb59-3c66022f41a9"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/visit-logs/resident/25-0459",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visit-logs",
+            "resident",
+            "25-0459"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E3",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/visits/delete/fc2dae90-f397-40d5-bb59-3c66022f41a9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visits",
+            "delete",
+            "fc2dae90-f397-40d5-bb59-3c66022f41a9"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "F1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/visits/stats/by-status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visits",
+            "stats",
+            "by-status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "F2",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/visits/cancel-day?guardId=985a4c59-e5ee-43cd-a616-609d78305108&date=2026-10-20",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "visits",
+            "cancel-day"
+          ],
+          "query": [
+            {
+              "key": "guardId",
+              "value": "985a4c59-e5ee-43cd-a616-609d78305108"
+            },
+            {
+              "key": "date",
+              "value": "2026-10-20"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
