@@ -71,16 +71,22 @@ public ResponseEntity<String> saveVisit(@RequestBody Visit visit) {
         return ResponseEntity.ok(message);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteVisit(@PathVariable UUID id) {
-        String message = visitService.delete(id);
+    
+@DeleteMapping("/delete/{id}")
+public ResponseEntity<String> deleteVisit(@PathVariable UUID id) {
+    String message = visitService.delete(id);
 
-        if (message.equals("The visit with that id does not exist")) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        }
-
-        return ResponseEntity.ok(message);
+    if (message.equals("The visit with that id does not exist")) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
     }
+
+    if (message.equals("That visit has visit logs, delete them first")) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+    }
+
+    return ResponseEntity.ok(message);
+}
+
     
 @GetMapping("/by-status")
 public ResponseEntity<List<Visit>> getVisitsByStatus(
